@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeLog</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <img src="imágenes/logo1.jpg" alt="AnimeLog">
+            </div>
+            <div>
+                <h1>AnimeLog</h1>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="add-anime">
+            <h2>Agregar Anime</h2>
+            <form id="anime-form">
+                <input type="text" id="anime-name" placeholder="Nombre del Anime" required>
+                <input type="text" id="anime-genre" placeholder="Género" required>
+                <input type="number" id="anime-episodes" placeholder="Número de Episodios" required>
+                <input type="text" id="anime-status" placeholder="Estado (En progreso, Visto, etc.)" required>
+                <textarea id="anime-comments" placeholder="Comentarios"></textarea>
+                <button type="submit">Agregar Anime</button>
+            </form>
+        </div>
+
+        <div class="anime-list">
+            <h2>Lista de animes</h2>
+            <ul id="anime-list-ul"></ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 AnimeLog</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
