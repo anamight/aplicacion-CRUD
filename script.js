@@ -3,7 +3,11 @@ const animeList = document.querySelector('ul');
 
 function loadAnimes(){
     const storedAnimes = JSON.parse(localStorage.getItem('animes')) || [];
-    storedAnimes.forEach(addAnimeToUI);
+    storedAnimes.forEach(anime => {
+        if (anime.name.trim()) {
+            addAnimeToUI(anime);
+        }
+    });
 }
 
 function addAnime(event) {
@@ -29,9 +33,13 @@ function addAnime(event) {
     addAnimeToUI(anime);
     saveAnimeToStorage(anime);
     form.reset();
+
+    cleanEmptyElements();
 }
 
 function addAnimeToUI(anime){
+    if (!anime.name.trim()) return; 
+
     const li = document.createElement('li');
     li.innerHTML = `<strong>${anime.name}</strong><br>
                     Género: ${anime.genre}<br>
@@ -74,8 +82,7 @@ function deleteAnime(event){
 }
 
  //Función para editar la lista de animes agregados
-
- function editAnime(anime, li) {
+function editAnime(anime, li) {
     const editForm = document.createElement('form');
 
     editForm.innerHTML = `
@@ -105,12 +112,29 @@ function deleteAnime(event){
         localStorage.setItem('animes', JSON.stringify(storedAnimes));
 
         li.innerHTML = '';
+        if (anime.name.trim()) {
         addAnimeToUI(anime);
+    } else {
+            li.remove(); 
+        }
+
+        cleanEmptyElements();
     });
 
     editForm.querySelector('.cancel').addEventListener('click', () => {
         li.innerHTML = '';
         addAnimeToUI(anime);
+
+        cleanEmptyElements();
+    });
+}
+
+function cleanEmptyElements() {
+    const listItems = animeList.querySelectorAll('li');
+    listItems.forEach(item => {
+        if (!item.textContent.trim() || !item.querySelector('strong')) {
+            item.remove();
+        }
     });
 }
 
